@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/server'
-import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { LayoutDashboard, Award, LogOut } from 'lucide-react'
 import { signOut } from '@/app/actions'
@@ -29,9 +28,9 @@ export default async function TraineeLayout({
             <Link href="/certificate" className="text-ivory/80 hover:text-gold transition-colors">Certificate</Link>
           </nav>
           <form action={signOut} className="hidden md:block ml-3">
-            <Button variant="outline" size="sm" className="border-ivory/20 text-ivory hover:bg-ivory/10 hover:text-gold text-xs">
+            <button type="submit" className="inline-flex items-center justify-center rounded-lg border border-ivory/20 text-ivory hover:bg-ivory/10 hover:text-gold text-xs h-8 px-3 font-medium transition-all">
               Sign Out
-            </Button>
+            </button>
           </form>
         </div>
       </header>

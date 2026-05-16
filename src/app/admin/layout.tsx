@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/server'
-import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { signOut } from '@/app/actions'
 
@@ -49,13 +48,12 @@ export default async function AdminLayout({
           </nav>
 
           <form action={signOut} className="ml-2">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="border-ivory/20 text-ivory hover:bg-ivory/10 hover:text-gold text-xs h-8"
+            <button 
+              type="submit"
+              className="inline-flex items-center justify-center rounded-lg border border-ivory/20 text-ivory hover:bg-ivory/10 hover:text-gold text-xs h-8 px-3 font-medium transition-all"
             >
               Sign Out
-            </Button>
+            </button>
           </form>
         </div>
 
