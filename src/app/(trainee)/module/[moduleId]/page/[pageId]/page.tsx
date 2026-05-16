@@ -13,7 +13,7 @@ export default async function TraineePageViewer({ params }: { params: Promise<{ 
   if (!pageData) return <div className="text-center py-12 text-warm-gray">Page not found</div>
 
   const { data: submissions } = await supabase.from('submissions').select('*').eq('page_id', pageId).eq('trainee_id', user!.id).eq('is_passing', true)
-  const isAlreadyPassed = (submissions && submissions.length > 0)
+  const isAlreadyPassed = !!(submissions && submissions.length > 0)
 
   return (
     <div className="space-y-5">
