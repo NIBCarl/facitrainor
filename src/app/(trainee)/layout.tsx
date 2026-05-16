@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { LayoutDashboard, Award, LogOut } from 'lucide-react'
+import { signOut } from '@/app/actions'
 
 export default async function TraineeLayout({
   children,
@@ -12,13 +12,6 @@ export default async function TraineeLayout({
 }) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-
-  async function handleSignOut() {
-    'use server'
-    const supabase = await createClient()
-    await supabase.auth.signOut()
-    redirect('/login')
-  }
 
   return (
     <div className="flex min-h-screen flex-col bg-cream">
@@ -35,7 +28,7 @@ export default async function TraineeLayout({
             <Link href="/dashboard" className="text-ivory/80 hover:text-gold transition-colors">Dashboard</Link>
             <Link href="/certificate" className="text-ivory/80 hover:text-gold transition-colors">Certificate</Link>
           </nav>
-          <form action={handleSignOut} className="hidden md:block ml-3">
+          <form action={signOut} className="hidden md:block ml-3">
             <Button variant="outline" size="sm" className="border-ivory/20 text-ivory hover:bg-ivory/10 hover:text-gold text-xs">
               Sign Out
             </Button>
@@ -59,7 +52,7 @@ export default async function TraineeLayout({
             <Award className="h-5 w-5" />
             <span className="text-[10px] font-medium">Certificate</span>
           </Link>
-          <form action={handleSignOut}>
+          <form action={signOut}>
             <button type="submit" className="flex flex-col items-center gap-1 text-warm-gray hover:text-destructive transition-colors py-2 px-4">
               <LogOut className="h-5 w-5" />
               <span className="text-[10px] font-medium">Sign Out</span>

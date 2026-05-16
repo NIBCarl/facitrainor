@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import { Menu } from 'lucide-react'
+import { signOut } from '@/app/actions'
 
 export default async function AdminLayout({
   children,
@@ -12,13 +11,6 @@ export default async function AdminLayout({
 }) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-
-  async function handleSignOut() {
-    'use server'
-    const supabase = await createClient()
-    await supabase.auth.signOut()
-    redirect('/login')
-  }
 
   const navLinks = [
     { href: '/admin/dashboard', label: 'Dashboard' },
@@ -56,7 +48,7 @@ export default async function AdminLayout({
             ))}
           </nav>
 
-          <form action={handleSignOut} className="ml-2">
+          <form action={signOut} className="ml-2">
             <Button 
               variant="outline" 
               size="sm" 
